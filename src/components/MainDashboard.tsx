@@ -10,8 +10,8 @@ import {
 } from '@mui/material';
 import { AgGridReact } from 'ag-grid-react';
 import { ColDef } from 'ag-grid-community';
-import 'ag-grid-community/styles/ag-grid.css';
-import 'ag-grid-community/styles/ag-theme-alpine-dark.css';
+import '/node_modules/ag-grid-community/styles/ag-grid.css';
+import '/node_modules/ag-grid-community/styles/ag-theme-alpine.css'; // Используем alpine вместо alpine-dark
 import { TradeData } from '../App';
 
 const GridContainer = ({
@@ -86,6 +86,18 @@ export const MainDashboard = ({ data }: { data: TradeData[] }) => {
     { field: 'loss_count', headerName: 'L', flex: 1 },
   ];
 
+  // Стили для AG-Grid
+  const gridStyle: React.CSSProperties = {
+    height: '100%',
+    width: '100%',
+    // @ts-ignore - CSS-переменные AG-Grid
+    '--ag-borders': 'none',
+    // @ts-ignore
+    '--ag-border-radius': '8px',
+    // @ts-ignore
+    '--ag-font-size': '14px',
+  };
+
   return (
     <Box
       sx={{
@@ -128,6 +140,9 @@ export const MainDashboard = ({ data }: { data: TradeData[] }) => {
                 <MenuItem value="RESTRICTED">RESTRICTED</MenuItem>
                 <MenuItem value="POSSIBLE">POSSIBLE</MenuItem>
                 <MenuItem value="REAL">REAL</MenuItem>
+                <MenuItem value="NO DEAL TYPE">NO DEAL TYPE</MenuItem>
+                <MenuItem value="TRADE NO STAT">TRADE NO STAT</MenuItem>
+                <MenuItem value="TRADE DUBLICATE">TRADE DUBLICATE</MenuItem>
               </Select>
             </FormControl>
           </GridItem>
@@ -143,6 +158,8 @@ export const MainDashboard = ({ data }: { data: TradeData[] }) => {
                 <MenuItem value="WEEKEND">WEEKEND</MenuItem>
                 <MenuItem value="MONDAY_12_20">MONDAY_12_20</MenuItem>
                 <MenuItem value="TUESDAY_14_24">TUESDAY_14_24</MenuItem>
+                <MenuItem value="WEDNESDAY_14_24">WEDNESDAY_14_24</MenuItem>
+                <MenuItem value="OTHER">OTHER</MenuItem>
               </Select>
             </FormControl>
           </GridItem>
@@ -151,14 +168,15 @@ export const MainDashboard = ({ data }: { data: TradeData[] }) => {
 
       <Box sx={{ flex: 1, minHeight: 0 }}>
         <div
-          className="ag-theme-alpine-dark"
-          style={{ height: '100%', width: '100%' }}
+          className="ag-theme-alpine" // Изменено с alpine-dark на alpine
+          style={gridStyle}
         >
           <AgGridReact
             rowData={filteredData}
             columnDefs={columnDefs}
             pagination={true}
             paginationPageSize={20}
+            domLayout="autoHeight"
           />
         </div>
       </Box>
