@@ -1,0 +1,25 @@
+/* Основные стили таблицы */
+.ag-theme-alpine {
+  --ag-background-color: #1e1e1e;
+  --ag-foreground-color: #ffffff;
+  --ag-border-color: #333;
+  --ag-row-hover-color: rgba(255, 167, 38, 0.1);
+  --ag-header-background-color: #252525;
+  --ag-odd-row-background-color: #1a1a1a;
+  --ag-selected-row-background-color: #333;
+  --ag-range-selection-background-color: rgba(25, 118, 210, 0.3);
+}
+
+/* Дополнительные стили для темной темы */
+.ag-theme-alpine .ag-header-cell {
+  color: #ffa726;
+  font-weight: 500;
+}
+
+.ag-theme-alpine .ag-cell {
+  border-bottom: 1px solid #333;
+}
+
+.ag-theme-alpine .ag-row:hover {
+  background-color: var(--ag-row-hover-color);
+}
